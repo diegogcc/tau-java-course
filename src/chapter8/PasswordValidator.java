@@ -27,15 +27,17 @@ public class PasswordValidator {
 
         PasswordValidator validator = login();
         validator.printPasswordRules();
+        String proposedPassword;
 
         do {
-            String proposedPassword = validator.getProposedPassword();
+            proposedPassword = validator.getProposedPassword();
             validator.changePassword(proposedPassword);
             if (!validator.isValid()){
                 System.out.println(validator.getErrorMessage());
             }
         } while (!validator.isValid());
 
+        validator.currentPassword = proposedPassword;
         System.out.println("Your password has been changed to: " + validator.currentPassword);
 
         validator.closeScanner();
